@@ -42,7 +42,7 @@ function Chats() {
       <ul className="mt-2 px-3">
         {conversations.map((c) => {
           const p = getProfile(c.id)!;
-          const last = c.messages[c.messages.length - 1];
+          const last = c.messages[c.messages.length - 1]!;
           return (
             <li key={c.id}>
               <Link to="/chats/$id" params={{ id: c.id }} className="flex items-center gap-3 rounded-2xl p-2 active:bg-muted">

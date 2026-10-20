@@ -22,8 +22,8 @@ function Discover() {
   const [match, setMatch] = useState<Profile | null>(null);
   const [expanded, setExpanded] = useState(false);
   const start = useRef<number | null>(null);
-  const current = profiles[index % profiles.length];
-  const next = profiles[(index + 1) % profiles.length];
+  const current = profiles[index % profiles.length]!;
+  const next = profiles[(index + 1) % profiles.length]!;
 
   const decide = (dir: "left" | "right" | "super") => {
     setDrag(dir === "left" ? -500 : 500);

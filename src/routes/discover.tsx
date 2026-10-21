@@ -99,7 +99,7 @@ function Slide({
 }: {
   p: Profile;
   first: boolean;
-  liked?: "like" | "super";
+  liked?: "like" | "super" | undefined;
   onLike: () => void;
   onSuper: () => void;
   expanded: boolean;

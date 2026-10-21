@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Briefcase, Building2, CheckCircle2, IdCard, Linkedin, Mail } from "lucide-react";
+import { ArrowLeft, Briefcase, Building2, CheckCircle2, Heart, IdCard, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Phone, IconChip } from "@/components/AppShell";
 
@@ -21,11 +21,30 @@ const methods = [
   { id: "id", icon: IdCard, tone: "sun", title: "Staff ID card", text: "Upload a photo of your work ID" },
 ] as const;
 
+const industries = [
+  { id: "fintech", label: "💰 Fintech" },
+  { id: "tech", label: "💻 Tech" },
+  { id: "banking", label: "🏦 Banking" },
+  { id: "legal", label: "⚖️ Legal" },
+  { id: "consulting", label: "📊 Consulting" },
+  { id: "health", label: "🏥 Health" },
+  { id: "media", label: "🎬 Media" },
+  { id: "other", label: "✨ Something else" },
+];
+
 function Verify() {
   const [step, setStep] = useState(0);
   const [method, setMethod] = useState<string>("email");
   const [code, setCode] = useState("");
+  const [interest, setInterest] = useState("Everyone");
+  const [ageMin, setAgeMin] = useState(24);
+  const [ageMax, setAgeMax] = useState(40);
+  const [distance, setDistance] = useState(15);
+  const [picks, setPicks] = useState<string[]>([]);
   const nav = useNavigate();
+
+  const togglePick = (id: string) =>
+    setPicks((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
 
   return (
     <Phone>
@@ -37,7 +56,7 @@ function Verify() {
             <button onClick={() => setStep(step - 1)} className="grid h-10 w-10 place-items-center rounded-full bg-card shadow-soft"><ArrowLeft className="h-5 w-5" /></button>
           )}
           <div className="flex gap-1.5">
-            {[0, 1, 2].map((i) => (
+            {[0, 1, 2, 3].map((i) => (
               <span key={i} className={`h-1.5 rounded-full transition-all ${i <= step ? "w-8 bg-primary" : "w-4 bg-border"}`} />
             ))}
           </div>
@@ -78,6 +97,70 @@ function Verify() {
 
         {step === 2 && (
           <>
+            <h1 className="mt-8 text-3xl font-semibold">Who are you looking for?</h1>
+            <p className="mt-2 text-sm text-muted-foreground">Set your preferences. You can change these anytime.</p>
+
+            <div className="mt-6 space-y-6">
+              <div>
+                <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><Heart className="h-3.5 w-3.5 text-coral" /> Interested in</p>
+                <div className="flex gap-2">
+                  {["Everyone", "Women", "Men"].map((o) => (
+                    <button key={o} onClick={() => setInterest(o)}
+                      className={`flex-1 rounded-2xl border-2 py-3 text-sm font-semibold transition ${interest === o ? "border-primary bg-coral-soft/60 text-primary" : "border-transparent bg-card shadow-soft"}`}>
+                      {o}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><Sparkles className="h-3.5 w-3.5 text-sun" /> Age range</p>
+                <div className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
+                  <select value={ageMin} onChange={(e) => setAgeMin(Number(e.target.value))}
+                    className="h-10 flex-1 rounded-xl bg-muted px-3 text-sm font-semibold outline-none">
+                    {Array.from({ length: 20 }, (_, i) => 21 + i).map((a) => <option key={a} value={a}>{a}</option>)}
+                  </select>
+                  <span className="text-xs font-semibold text-muted-foreground">to</span>
+                  <select value={ageMax} onChange={(e) => setAgeMax(Number(e.target.value))}
+                    className="h-10 flex-1 rounded-xl bg-muted px-3 text-sm font-semibold outline-none">
+                    {Array.from({ length: 22 }, (_, i) => 30 + i).map((a) => <option key={a} value={a}>{a}</option>)}
+                  </select>
+                  <span className="text-xs font-semibold text-muted-foreground">years</span>
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2 flex items-center justify-between text-xs font-semibold text-muted-foreground">
+                  <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-sky" /> Maximum distance</span>
+                  <span className="text-sm font-bold text-foreground">{distance} km</span>
+                </p>
+                <div className="rounded-2xl bg-card px-4 pb-2 pt-3 shadow-soft">
+                  <input type="range" min={1} max={50} value={distance} onChange={(e) => setDistance(Number(e.target.value))}
+                    className="w-full" style={{ accentColor: "var(--primary)" }} />
+                  <div className="flex justify-between text-[10px] font-semibold text-muted-foreground"><span>1 km</span><span>50 km</span></div>
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><Briefcase className="h-3.5 w-3.5 text-mint" /> Industries they work in</p>
+                <div className="flex flex-wrap gap-2">
+                  {industries.map((i) => {
+                    const on = picks.includes(i.id);
+                    return (
+                      <button key={i.id} onClick={() => togglePick(i.id)}
+                        className={`rounded-full border-2 px-3 py-2 text-xs font-semibold transition ${on ? "border-primary bg-mint-soft/60 text-primary" : "border-transparent bg-card shadow-soft"}`}>
+                        {i.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {step === 3 && (
+          <>
             <h1 className="mt-8 text-3xl font-semibold">Enter the code</h1>
             <p className="mt-2 text-sm text-muted-foreground">We sent a 4-digit code to your work email. (Demo: any 4 digits)</p>
             <input value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 4))}
@@ -87,10 +170,10 @@ function Verify() {
 
         <div className="mt-auto pb-8 pt-8">
           <button
-            disabled={step === 2 && code.length < 4}
-            onClick={() => (step < 2 ? setStep(step + 1) : nav({ to: "/discover" }))}
+            disabled={step === 3 && code.length < 4}
+            onClick={() => (step < 3 ? setStep(step + 1) : nav({ to: "/discover" }))}
             className="h-14 w-full rounded-full bg-brand font-semibold text-primary-foreground shadow-card disabled:opacity-40">
-            {step < 2 ? "Continue" : "Verify & start matching"}
+            {step < 3 ? "Continue" : "Verify & start matching"}
           </button>
         </div>
       </div>

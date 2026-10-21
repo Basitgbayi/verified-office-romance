@@ -11,17 +11,17 @@ const tabs = [
 
 export function Phone({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto flex min-h-screen max-w-md flex-col bg-background sm:my-6 sm:min-h-[860px] sm:overflow-hidden sm:rounded-[2.5rem] sm:shadow-card">
+    <div className="mx-auto flex h-dvh max-w-md flex-col bg-background sm:my-6 sm:h-[860px] sm:overflow-hidden sm:rounded-[2.5rem] sm:shadow-card">
       {children}
     </div>
   );
 }
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, flush }: { children: ReactNode; flush?: boolean }) {
   const { pathname } = useLocation();
   return (
     <Phone>
-      <main className="flex-1 overflow-y-auto pb-24">{children}</main>
+      <main className={flush ? "min-h-0 flex-1 overflow-hidden" : "flex-1 overflow-y-auto pb-24"}>{children}</main>
       <nav className="sticky bottom-0 border-t bg-card/95 px-4 pb-5 pt-2 backdrop-blur">
         <ul className="flex justify-between">
           {tabs.map((t) => {

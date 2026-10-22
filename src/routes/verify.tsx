@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Cake, User, Briefcase, Building2, CheckCircle2, Heart, IdCard, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { ArrowLeft, Briefcase, CheckCircle2, Heart, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Phone, IconChip } from "@/components/AppShell";
 
@@ -33,6 +33,8 @@ const industries = [
   { id: "other", label: "✨ Something else" },
 ];
 
+const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
 function Verify() {
   const [step, setStep] = useState(0);
   const [method, setMethod] = useState<string>("email");
@@ -45,9 +47,22 @@ function Verify() {
   const [picks, setPicks] = useState<string[]>([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState("");
-  const ageNum = Number(age);
-  const personalOk = firstName.trim().length > 0 && lastName.trim().length > 0 && ageNum >= 18 && ageNum <= 99;
+  const [dobDay, setDobDay] = useState("Day");
+  const [dobMonth, setDobMonth] = useState("Month");
+  const [dobYear, setDobYear] = useState("Year");
+
+  const dob = dobDay !== "Day" && dobMonth !== "Month" && dobYear !== "Year"
+    ? new Date(Number(dobYear), Number(dobMonth), Number(dobDay))
+    : null;
+  const dobValid = !!dob && dob.getDate() === Number(dobDay) && dob.getMonth() === Number(dobMonth) && dob.getFullYear() === Number(dobYear);
+  let age = 0;
+  if (dobValid && dob) {
+    const now = new Date();
+    age = now.getFullYear() - dob.getFullYear();
+    const beforeBirthday = now.getMonth() < dob.getMonth() || (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate());
+    if (beforeBirthday) age -= 1;
+  }
+  const personalOk = firstName.trim().length > 0 && lastName.trim().length > 0 && dobValid && age >= 18 && age <= 99;
   const nav = useNavigate();
 
   const togglePick = (id: string) =>
@@ -75,28 +90,38 @@ function Verify() {
             <h1 className="mt-8 text-3xl font-semibold">Tell us about you</h1>
             <p className="mt-2 text-sm text-muted-foreground">Your first name and age show on your profile.</p>
             <div className="mt-6 space-y-3">
-              <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
-                <IconChip icon={User} tone="coral" />
-                <div className="flex-1">
-                  <span className="text-xs font-semibold text-muted-foreground">First name</span>
-                  <input value={firstName} maxLength={50} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Amara" />
-                </div>
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">First name</span>
+                <input value={firstName} maxLength={50} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Amara" />
               </label>
-              <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
-                <IconChip icon={User} tone="sky" />
-                <div className="flex-1">
-                  <span className="text-xs font-semibold text-muted-foreground">Last name</span>
-                  <input value={lastName} maxLength={50} onChange={(e) => setLastName(e.target.value)} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Okafor" />
-                </div>
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Last name</span>
+                <input value={lastName} maxLength={50} onChange={(e) => setLastName(e.target.value)} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Okafor" />
               </label>
-              <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
-                <IconChip icon={Cake} tone="sun" />
-                <div className="flex-1">
-                  <span className="text-xs font-semibold text-muted-foreground">Age</span>
-                  <input value={age} inputMode="numeric" onChange={(e) => setAge(e.target.value.replace(/\D/g, "").slice(0, 2))} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. 28" />
+              <div>
+                <span className="text-xs font-semibold text-muted-foreground">Date of birth</span>
+                <div className="mt-1.5 grid grid-cols-3 gap-2">
+                  <select value={dobDay} onChange={(e) => setDobDay(e.target.value)}
+                    className="h-12 rounded-2xl bg-card px-3 text-sm font-semibold shadow-soft outline-none focus:border-primary">
+                    <option value="Day">Day</option>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => <option key={d} value={d}>{d}</option>)}
+                  </select>
+                  <select value={dobMonth} onChange={(e) => setDobMonth(e.target.value)}
+                    className="h-12 rounded-2xl bg-card px-3 text-sm font-semibold shadow-soft outline-none focus:border-primary">
+                    <option value="Month">Month</option>
+                    {months.map((m, i) => <option key={m} value={i}>{m}</option>)}
+                  </select>
+                  <select value={dobYear} onChange={(e) => setDobYear(e.target.value)}
+                    className="h-12 rounded-2xl bg-card px-3 text-sm font-semibold shadow-soft outline-none focus:border-primary">
+                    <option value="Year">Year</option>
+                    {Array.from({ length: 82 }, (_, i) => new Date().getFullYear() - 18 - i).map((y) => <option key={y} value={y}>{y}</option>)}
+                  </select>
                 </div>
-              </label>
-              {age !== "" && ageNum < 18 && <p className="text-sm font-semibold text-destructive">You must be 18 or older to join.</p>}
+              </div>
+              {(dobDay !== "Day" && dobMonth !== "Month" && dobYear !== "Year" && !dobValid) && (
+                <p className="text-sm font-semibold text-destructive">Enter a valid date of birth.</p>
+              )}
+              {dobValid && age < 18 && <p className="text-sm font-semibold text-destructive">You must be 18 or older to join.</p>}
             </div>
           </>
         )}
@@ -106,8 +131,14 @@ function Verify() {
             <h1 className="mt-8 text-3xl font-semibold">Where do you work?</h1>
             <p className="mt-2 text-sm text-muted-foreground">Only professionals with a real 9-to-5 can join.</p>
             <div className="mt-6 space-y-3">
-              <Field icon={Briefcase} tone="mint" label="Job title" placeholder="e.g. Financial Analyst" />
-              <Field icon={Building2} tone="sky" label="Company" placeholder="e.g. Access Bank" />
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Job title</span>
+                <input className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Financial Analyst" />
+              </label>
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Company</span>
+                <input className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Access Bank" />
+              </label>
             </div>
           </>
         )}
@@ -225,17 +256,5 @@ function Verify() {
         </div>
       </div>
     </Phone>
-  );
-}
-
-function Field(props: { icon: any; tone: "mint" | "sky"; label: string; placeholder: string }) {
-  return (
-    <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
-      <IconChip icon={props.icon} tone={props.tone} />
-      <div className="flex-1">
-        <span className="text-xs font-semibold text-muted-foreground">{props.label}</span>
-        <input className="w-full bg-transparent text-sm outline-none" placeholder={props.placeholder} />
-      </div>
-    </label>
   );
 }

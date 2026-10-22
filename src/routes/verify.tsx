@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Briefcase, Building2, CheckCircle2, Heart, IdCard, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { ArrowLeft, Cake, User, Briefcase, Building2, CheckCircle2, Heart, IdCard, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Phone, IconChip } from "@/components/AppShell";
 
@@ -40,6 +40,11 @@ function Verify() {
   const [ageMax, setAgeMax] = useState(40);
   const [distance, setDistance] = useState(15);
   const [picks, setPicks] = useState<string[]>([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const ageNum = Number(age);
+  const personalOk = firstName.trim().length > 0 && lastName.trim().length > 0 && ageNum >= 18 && ageNum <= 99;
   const nav = useNavigate();
 
   const togglePick = (id: string) =>
@@ -55,7 +60,7 @@ function Verify() {
             <button onClick={() => setStep(step - 1)} className="grid h-10 w-10 place-items-center rounded-full bg-card shadow-soft"><ArrowLeft className="h-5 w-5" /></button>
           )}
           <div className="flex gap-1.5">
-            {[0, 1, 2, 3].map((i) => (
+            {[0, 1, 2, 3, 4].map((i) => (
               <span key={i} className={`h-1.5 rounded-full transition-all ${i <= step ? "w-8 bg-primary" : "w-4 bg-border"}`} />
             ))}
           </div>
@@ -63,6 +68,37 @@ function Verify() {
         </div>
 
         {step === 0 && (
+          <>
+            <h1 className="mt-8 text-3xl font-semibold">Tell us about you</h1>
+            <p className="mt-2 text-sm text-muted-foreground">Your first name and age show on your profile.</p>
+            <div className="mt-6 space-y-3">
+              <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
+                <IconChip icon={User} tone="coral" />
+                <div className="flex-1">
+                  <span className="text-xs font-semibold text-muted-foreground">First name</span>
+                  <input value={firstName} maxLength={50} onChange={(e) => setFirstName(e.target.value)} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Amara" />
+                </div>
+              </label>
+              <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
+                <IconChip icon={User} tone="sky" />
+                <div className="flex-1">
+                  <span className="text-xs font-semibold text-muted-foreground">Last name</span>
+                  <input value={lastName} maxLength={50} onChange={(e) => setLastName(e.target.value)} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Okafor" />
+                </div>
+              </label>
+              <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
+                <IconChip icon={Cake} tone="sun" />
+                <div className="flex-1">
+                  <span className="text-xs font-semibold text-muted-foreground">Age</span>
+                  <input value={age} inputMode="numeric" onChange={(e) => setAge(e.target.value.replace(/\D/g, "").slice(0, 2))} className="w-full bg-transparent text-sm outline-none" placeholder="e.g. 28" />
+                </div>
+              </label>
+              {age !== "" && ageNum < 18 && <p className="text-sm font-semibold text-destructive">You must be 18 or older to join.</p>}
+            </div>
+          </>
+        )}
+
+        {step === 1 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Where do you work?</h1>
             <p className="mt-2 text-sm text-muted-foreground">Only professionals with a real 9-to-5 can join.</p>
@@ -73,7 +109,7 @@ function Verify() {
           </>
         )}
 
-        {step === 1 && (
+        {step === 2 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Verify your workplace</h1>
             <p className="mt-2 text-sm text-muted-foreground">Pick one. Your employer never sees your profile.</p>
@@ -94,7 +130,7 @@ function Verify() {
           </>
         )}
 
-        {step === 2 && (
+        {step === 3 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Who are you looking for?</h1>
             <p className="mt-2 text-sm text-muted-foreground">Set your preferences. You can change these anytime.</p>
@@ -158,7 +194,7 @@ function Verify() {
           </>
         )}
 
-        {step === 3 && (
+        {step === 4 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Enter the code</h1>
             <p className="mt-2 text-sm text-muted-foreground">We sent a 4-digit code to your work email. (Demo: any 4 digits)</p>
@@ -169,10 +205,10 @@ function Verify() {
 
         <div className="mt-auto pb-8 pt-8">
           <button
-            disabled={step === 3 && code.length < 4}
-            onClick={() => (step < 3 ? setStep(step + 1) : nav({ to: "/discover" }))}
+            disabled={(step === 0 && !personalOk) || (step === 4 && code.length < 4)}
+            onClick={() => (step < 4 ? setStep(step + 1) : nav({ to: "/discover" }))}
             className="h-14 w-full rounded-full bg-brand font-semibold text-primary-foreground shadow-card disabled:opacity-40">
-            {step < 3 ? "Continue" : "Verify & start matching"}
+            {step < 4 ? "Continue" : "Verify & start matching"}
           </button>
         </div>
       </div>

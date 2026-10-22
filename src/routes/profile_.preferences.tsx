@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Chips, Section, Segmented, SubPage } from "@/components/SubPage";
+import { Chips, Section, Segmented, SubPage, fieldClass } from "@/components/SubPage";
 import { Slider } from "@/components/ui/slider";
 
 export const Route = createFileRoute("/profile_/preferences")({
@@ -17,7 +17,10 @@ export const Route = createFileRoute("/profile_/preferences")({
   component: Prefs,
 });
 
+const states = ["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT Abuja","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
+
 function Prefs() {
+  const [state, setState] = useState("Lagos");
   const [gender, setGender] = useState("Women");
   const [age, setAge] = useState([25, 35]);
   const [dist, setDist] = useState([15]);
@@ -30,6 +33,12 @@ function Prefs() {
     <SubPage title="Dating preferences" subtitle="We use these to pick your daily matches" onSave={() => {}}>
       <Section title="Show me"><Segmented options={["Women", "Men", "Everyone"]} value={gender} onChange={setGender} /></Section>
       <Section title={`Age range · ${age[0]}–${age[1]}`}><Slider min={21} max={60} step={1} value={age} onValueChange={setAge} /></Section>
+      <Section title="State">
+        <select value={state} onChange={(e) => setState(e.target.value)} className={fieldClass} aria-label="State">
+          <option value="Any">Any state</option>
+          {states.map((s) => <option key={s} value={s}>{s}</option>)}
+        </select>
+      </Section>
       <Section title={`Maximum distance · ${dist[0]} km`}><Slider min={1} max={50} step={1} value={dist} onValueChange={setDist} /></Section>
       <Section title="Looking for"><Segmented options={["Long-term", "Casual", "Not sure"]} value={intent} onChange={setIntent} /></Section>
       <Section title="Industries">

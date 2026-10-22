@@ -31,7 +31,7 @@ function Prefs() {
 
   return (
     <SubPage title="Dating preferences" subtitle="We use these to pick your daily matches" onSave={() => {}}>
-      <Section title="Show me"><Segmented options={["Women", "Men", "Everyone"]} value={gender} onChange={setGender} /></Section>
+      <Section title="Show me"><Segmented options={["Women", "Men"]} value={gender} onChange={setGender} /></Section>
       <Section title={`Age range · ${age[0]}–${age[1]}`}><Slider min={21} max={60} step={1} value={age} onValueChange={setAge} /></Section>
       <Section title="State">
         <select value={state} onChange={(e) => setState(e.target.value)} className={fieldClass} aria-label="State">

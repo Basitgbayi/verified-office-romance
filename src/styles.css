@@ -110,6 +110,9 @@
     font-family: var(--font-sans);
     -webkit-tap-highlight-color: transparent;
   }
+  input::placeholder, textarea::placeholder {
+    opacity: 0.5;
+  }
   h1, h2, h3 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;

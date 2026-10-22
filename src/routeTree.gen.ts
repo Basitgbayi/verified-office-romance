@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChatsRouteImport } from './routes/chats'
 import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as LikesRouteImport } from './routes/likes'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as ChatsIndexRouteImport } from './routes/chats.index'
@@ -42,6 +43,11 @@ const DiscoverRoute = DiscoverRouteImport.update({
 const LikesRoute = LikesRouteImport.update({
   id: '/likes',
   path: '/likes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/chats': typeof ChatsRouteWithChildren
   '/discover': typeof DiscoverRoute
   '/likes': typeof LikesRoute
+  '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/discover': typeof DiscoverRoute
   '/likes': typeof LikesRoute
+  '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/chats': typeof ChatsRouteWithChildren
   '/discover': typeof DiscoverRoute
   '/likes': typeof LikesRoute
+  '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/discover'
     | '/likes'
+    | '/login'
     | '/profile'
     | '/verify'
     | '/chats/$id'
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/'
     | '/discover'
     | '/likes'
+    | '/login'
     | '/profile'
     | '/verify'
     | '/chats/$id'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/discover'
     | '/likes'
+    | '/login'
     | '/profile'
     | '/verify'
     | '/chats/$id'
@@ -198,6 +210,7 @@ export interface RootRouteChildren {
   ChatsRoute: typeof ChatsRouteWithChildren
   DiscoverRoute: typeof DiscoverRoute
   LikesRoute: typeof LikesRoute
+  LoginRoute: typeof LoginRoute
   ProfileRoute: typeof ProfileRoute
   VerifyRoute: typeof VerifyRoute
   ProfileEditRoute: typeof ProfileEditRoute
@@ -236,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/likes'
       fullPath: '/likes'
       preLoaderRoute: typeof LikesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChatsRoute: ChatsRouteWithChildren,
   DiscoverRoute: DiscoverRoute,
   LikesRoute: LikesRoute,
+  LoginRoute: LoginRoute,
   ProfileRoute: ProfileRoute,
   VerifyRoute: VerifyRoute,
   ProfileEditRoute: ProfileEditRoute,

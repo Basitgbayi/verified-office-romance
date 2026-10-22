@@ -50,7 +50,7 @@ function Welcome() {
           <Link to="/verify" className="flex h-14 items-center justify-center gap-2 rounded-full bg-brand font-semibold text-primary-foreground shadow-card">
             <BadgeCheck className="h-5 w-5" /> Get started
           </Link>
-          <Link to="/discover" className="flex h-12 items-center justify-center rounded-full border bg-card font-semibold">
+          <Link to="/login" className="flex h-12 items-center justify-center rounded-full border bg-card font-semibold">
             I already have an account
           </Link>
         </div>

@@ -18,7 +18,6 @@ export const Route = createFileRoute("/verify")({
 const methods = [
   { id: "email", icon: Mail, tone: "coral", title: "Work email", text: "Get a code at you@company.com" },
   { id: "linkedin", icon: Linkedin, tone: "sky", title: "LinkedIn", text: "Connect your current position" },
-  { id: "id", icon: IdCard, tone: "sun", title: "Staff ID card", text: "Upload a photo of your work ID" },
 ] as const;
 
 const industries = [

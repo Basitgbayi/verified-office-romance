@@ -16,12 +16,12 @@ export const Route = createFileRoute("/profile")({
 });
 
 const items = [
-  { icon: Pencil, tone: "coral", label: "Edit profile" },
-  { icon: SlidersHorizontal, tone: "sky", label: "Dating preferences" },
-  { icon: Building2, tone: "mint", label: "Workplace & privacy" },
-  { icon: Eye, tone: "berry", label: "Hide from colleagues" },
-  { icon: Bell, tone: "sun", label: "Notifications" },
-  { icon: Settings, tone: "sky", label: "Settings" },
+  { icon: Pencil, tone: "coral", label: "Edit profile", to: "/profile/edit" },
+  { icon: SlidersHorizontal, tone: "sky", label: "Dating preferences", to: "/profile/preferences" },
+  { icon: Building2, tone: "mint", label: "Workplace & privacy", to: "/profile/workplace" },
+  { icon: Eye, tone: "berry", label: "Hide from colleagues", to: "/profile/hide" },
+  { icon: Bell, tone: "sun", label: "Notifications", to: "/profile/notifications" },
+  { icon: Settings, tone: "sky", label: "Settings", to: "/profile/settings" },
 ] as const;
 
 function Profile() {
@@ -65,10 +65,12 @@ function Profile() {
 
       <ul className="mx-5 mt-4 divide-y rounded-3xl bg-card px-3 shadow-soft">
         {items.map((it) => (
-          <li key={it.label} className="flex items-center gap-3 py-3">
+          <li key={it.label}>
+            <Link to={it.to} className="flex items-center gap-3 py-3 transition active:opacity-60">
             <IconChip icon={it.icon} tone={it.tone} />
             <span className="flex-1 text-sm font-semibold">{it.label}</span>
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            </Link>
           </li>
         ))}
       </ul>

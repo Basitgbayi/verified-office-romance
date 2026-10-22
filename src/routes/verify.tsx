@@ -109,7 +109,7 @@ function Verify() {
                   <select value={dobMonth} onChange={(e) => setDobMonth(e.target.value)}
                     className="h-12 rounded-2xl bg-card px-3 text-sm font-semibold shadow-soft outline-none focus:border-primary">
                     <option value="Month">Month</option>
-                    {months.map((m, i) => <option key={m} value={i - 1}>{m}</option>)}
+                    {months.map((m, i) => <option key={m} value={i}>{m}</option>)}
                   </select>
                   <select value={dobYear} onChange={(e) => setDobYear(e.target.value)}
                     className="h-12 rounded-2xl bg-card px-3 text-sm font-semibold shadow-soft outline-none focus:border-primary">

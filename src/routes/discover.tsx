@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bell, Briefcase, Building2, CalendarClock, ChevronDown, ChevronUp, Heart, MapPin, SlidersHorizontal, Star } from "lucide-react";
+import { Bell, Briefcase, Building2, CalendarClock, ChevronDown, ChevronUp, Heart, MapPin, Star } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import { AppShell, VerifiedBadge, IconChip } from "@/components/AppShell";
 import { profiles, type Profile } from "@/lib/data";
@@ -53,7 +53,6 @@ function Discover() {
           </div>
           <div className="flex gap-2">
             <button className="grid h-10 w-10 place-items-center rounded-full bg-sun-soft text-sun"><Bell className="h-5 w-5" /></button>
-            <button className="grid h-10 w-10 place-items-center rounded-full bg-sky-soft text-sky"><SlidersHorizontal className="h-5 w-5" /></button>
           </div>
         </header>
 

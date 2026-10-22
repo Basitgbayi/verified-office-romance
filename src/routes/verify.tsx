@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Cake, User, Briefcase, Building2, CheckCircle2, Heart, IdCard, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { ArrowLeft, Briefcase, Building2, CheckCircle2, Heart, IdCard, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Phone, IconChip } from "@/components/AppShell";
 
@@ -131,8 +131,14 @@ function Verify() {
             <h1 className="mt-8 text-3xl font-semibold">Where do you work?</h1>
             <p className="mt-2 text-sm text-muted-foreground">Only professionals with a real 9-to-5 can join.</p>
             <div className="mt-6 space-y-3">
-              <Field icon={Briefcase} tone="mint" label="Job title" placeholder="e.g. Financial Analyst" />
-              <Field icon={Building2} tone="sky" label="Company" placeholder="e.g. Access Bank" />
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Job title</span>
+                <input className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Financial Analyst" />
+              </label>
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Company</span>
+                <input className="w-full bg-transparent text-sm outline-none" placeholder="e.g. Access Bank" />
+              </label>
             </div>
           </>
         )}

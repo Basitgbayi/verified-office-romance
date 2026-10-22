@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Briefcase, Building2, CheckCircle2, Heart, IdCard, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { ArrowLeft, Briefcase, CheckCircle2, Heart, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Phone, IconChip } from "@/components/AppShell";
 
@@ -256,17 +256,5 @@ function Verify() {
         </div>
       </div>
     </Phone>
-  );
-}
-
-function Field(props: { icon: any; tone: "mint" | "sky"; label: string; placeholder: string }) {
-  return (
-    <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
-      <IconChip icon={props.icon} tone={props.tone} />
-      <div className="flex-1">
-        <span className="text-xs font-semibold text-muted-foreground">{props.label}</span>
-        <input className="w-full bg-transparent text-sm outline-none" placeholder={props.placeholder} />
-      </div>
-    </label>
   );
 }

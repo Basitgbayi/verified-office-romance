@@ -35,7 +35,7 @@ function Verify() {
   const [step, setStep] = useState(0);
   const [method, setMethod] = useState<string>("email");
   const [code, setCode] = useState("");
-  const [interest, setInterest] = useState("Everyone");
+  const [interest, setInterest] = useState("Women");
   const [ageMin, setAgeMin] = useState(24);
   const [ageMax, setAgeMax] = useState(40);
   const [distance, setDistance] = useState(15);
@@ -139,7 +139,7 @@ function Verify() {
               <div>
                 <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><Heart className="h-3.5 w-3.5 text-coral" /> Interested in</p>
                 <div className="flex gap-2">
-                  {["Everyone", "Women", "Men"].map((o) => (
+                  {["Women", "Men"].map((o) => (
                     <button key={o} onClick={() => setInterest(o)}
                       className={`flex-1 rounded-2xl border-2 py-3 text-sm font-semibold transition ${interest === o ? "border-primary bg-coral-soft/60 text-primary" : "border-transparent bg-card shadow-soft"}`}>
                       {o}

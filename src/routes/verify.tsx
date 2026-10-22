@@ -33,6 +33,8 @@ const industries = [
   { id: "other", label: "✨ Something else" },
 ];
 
+const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
 function Verify() {
   const [step, setStep] = useState(0);
   const [method, setMethod] = useState<string>("email");
@@ -45,9 +47,22 @@ function Verify() {
   const [picks, setPicks] = useState<string[]>([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState("");
-  const ageNum = Number(age);
-  const personalOk = firstName.trim().length > 0 && lastName.trim().length > 0 && ageNum >= 18 && ageNum <= 99;
+  const [dobDay, setDobDay] = useState("Day");
+  const [dobMonth, setDobMonth] = useState("Month");
+  const [dobYear, setDobYear] = useState("Year");
+
+  const dob = dobDay !== "Day" && dobMonth !== "Month" && dobYear !== "Year"
+    ? new Date(Number(dobYear), Number(dobMonth), Number(dobDay))
+    : null;
+  const dobValid = !!dob && dob.getDate() === Number(dobDay) && dob.getMonth() === Number(dobMonth) && dob.getFullYear() === Number(dobYear);
+  let age = 0;
+  if (dobValid && dob) {
+    const now = new Date();
+    age = now.getFullYear() - dob.getFullYear();
+    const beforeBirthday = now.getMonth() < dob.getMonth() || (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate());
+    if (beforeBirthday) age -= 1;
+  }
+  const personalOk = firstName.trim().length > 0 && lastName.trim().length > 0 && dobValid && age >= 18 && age <= 99;
   const nav = useNavigate();
 
   const togglePick = (id: string) =>

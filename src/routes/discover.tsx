@@ -7,9 +7,9 @@ import { profiles, type Profile } from "@/lib/data";
 export const Route = createFileRoute("/discover")({
   head: () => ({
     meta: [
-      { title: "Discover — Lunchbreak" },
+      { title: "Discover — Afterfive" },
       { name: "description", content: "Today's picks of verified professionals near you." },
-      { property: "og:title", content: "Discover — Lunchbreak" },
+      { property: "og:title", content: "Discover — Afterfive" },
       { property: "og:description", content: "Scroll through verified professionals." },
     ],
   }),

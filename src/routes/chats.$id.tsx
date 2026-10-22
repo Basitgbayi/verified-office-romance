@@ -12,10 +12,10 @@ export const Route = createFileRoute("/chats/$id")({
   },
   head: () => ({
     meta: [
-      { title: "Chat — Lunchbreak" },
+      { title: "Chat — Afterfive" },
       { name: "description", content: "Chat with your match." },
-      { property: "og:title", content: "Chat — Lunchbreak" },
-      { property: "og:description", content: "Chat with your Lunchbreak match." },
+      { property: "og:title", content: "Chat — Afterfive" },
+      { property: "og:description", content: "Chat with your Afterfive match." },
     ],
   }),
   component: Chat,

@@ -17,6 +17,12 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as ChatsIndexRouteImport } from './routes/chats.index'
 import { Route as ChatsIdRouteImport } from './routes/chats.$id'
+import { Route as ProfileEditRouteImport } from './routes/profile_.edit'
+import { Route as ProfileHideRouteImport } from './routes/profile_.hide'
+import { Route as ProfileNotificationsRouteImport } from './routes/profile_.notifications'
+import { Route as ProfilePreferencesRouteImport } from './routes/profile_.preferences'
+import { Route as ProfileSettingsRouteImport } from './routes/profile_.settings'
+import { Route as ProfileWorkplaceRouteImport } from './routes/profile_.workplace'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +64,36 @@ const ChatsIdRoute = ChatsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ChatsRoute,
 } as any)
+const ProfileEditRoute = ProfileEditRouteImport.update({
+  id: '/profile_/edit',
+  path: '/profile/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileHideRoute = ProfileHideRouteImport.update({
+  id: '/profile_/hide',
+  path: '/profile/hide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileNotificationsRoute = ProfileNotificationsRouteImport.update({
+  id: '/profile_/notifications',
+  path: '/profile/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilePreferencesRoute = ProfilePreferencesRouteImport.update({
+  id: '/profile_/preferences',
+  path: '/profile/preferences',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileSettingsRoute = ProfileSettingsRouteImport.update({
+  id: '/profile_/settings',
+  path: '/profile/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileWorkplaceRoute = ProfileWorkplaceRouteImport.update({
+  id: '/profile_/workplace',
+  path: '/profile/workplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -67,6 +103,12 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
+  '/profile/edit': typeof ProfileEditRoute
+  '/profile/hide': typeof ProfileHideRoute
+  '/profile/notifications': typeof ProfileNotificationsRoute
+  '/profile/preferences': typeof ProfilePreferencesRoute
+  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile/workplace': typeof ProfileWorkplaceRoute
   '/chats/': typeof ChatsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -76,6 +118,12 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
+  '/profile/edit': typeof ProfileEditRoute
+  '/profile/hide': typeof ProfileHideRoute
+  '/profile/notifications': typeof ProfileNotificationsRoute
+  '/profile/preferences': typeof ProfilePreferencesRoute
+  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile/workplace': typeof ProfileWorkplaceRoute
   '/chats': typeof ChatsIndexRoute
 }
 export interface FileRoutesById {
@@ -87,6 +135,12 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
+  '/profile_/edit': typeof ProfileEditRoute
+  '/profile_/hide': typeof ProfileHideRoute
+  '/profile_/notifications': typeof ProfileNotificationsRoute
+  '/profile_/preferences': typeof ProfilePreferencesRoute
+  '/profile_/settings': typeof ProfileSettingsRoute
+  '/profile_/workplace': typeof ProfileWorkplaceRoute
   '/chats/': typeof ChatsIndexRoute
 }
 export interface FileRouteTypes {
@@ -99,6 +153,12 @@ export interface FileRouteTypes {
     | '/profile'
     | '/verify'
     | '/chats/$id'
+    | '/profile/edit'
+    | '/profile/hide'
+    | '/profile/notifications'
+    | '/profile/preferences'
+    | '/profile/settings'
+    | '/profile/workplace'
     | '/chats/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -108,6 +168,12 @@ export interface FileRouteTypes {
     | '/profile'
     | '/verify'
     | '/chats/$id'
+    | '/profile/edit'
+    | '/profile/hide'
+    | '/profile/notifications'
+    | '/profile/preferences'
+    | '/profile/settings'
+    | '/profile/workplace'
     | '/chats'
   id:
     | '__root__'
@@ -118,6 +184,12 @@ export interface FileRouteTypes {
     | '/profile'
     | '/verify'
     | '/chats/$id'
+    | '/profile_/edit'
+    | '/profile_/hide'
+    | '/profile_/notifications'
+    | '/profile_/preferences'
+    | '/profile_/settings'
+    | '/profile_/workplace'
     | '/chats/'
   fileRoutesById: FileRoutesById
 }
@@ -128,6 +200,12 @@ export interface RootRouteChildren {
   LikesRoute: typeof LikesRoute
   ProfileRoute: typeof ProfileRoute
   VerifyRoute: typeof VerifyRoute
+  ProfileEditRoute: typeof ProfileEditRoute
+  ProfileHideRoute: typeof ProfileHideRoute
+  ProfileNotificationsRoute: typeof ProfileNotificationsRoute
+  ProfilePreferencesRoute: typeof ProfilePreferencesRoute
+  ProfileSettingsRoute: typeof ProfileSettingsRoute
+  ProfileWorkplaceRoute: typeof ProfileWorkplaceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -188,6 +266,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChatsIdRouteImport
       parentRoute: typeof ChatsRoute
     }
+    '/profile_/edit': {
+      id: '/profile_/edit'
+      path: '/profile/edit'
+      fullPath: '/profile/edit'
+      preLoaderRoute: typeof ProfileEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile_/hide': {
+      id: '/profile_/hide'
+      path: '/profile/hide'
+      fullPath: '/profile/hide'
+      preLoaderRoute: typeof ProfileHideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile_/notifications': {
+      id: '/profile_/notifications'
+      path: '/profile/notifications'
+      fullPath: '/profile/notifications'
+      preLoaderRoute: typeof ProfileNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile_/preferences': {
+      id: '/profile_/preferences'
+      path: '/profile/preferences'
+      fullPath: '/profile/preferences'
+      preLoaderRoute: typeof ProfilePreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile_/settings': {
+      id: '/profile_/settings'
+      path: '/profile/settings'
+      fullPath: '/profile/settings'
+      preLoaderRoute: typeof ProfileSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile_/workplace': {
+      id: '/profile_/workplace'
+      path: '/profile/workplace'
+      fullPath: '/profile/workplace'
+      preLoaderRoute: typeof ProfileWorkplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -210,6 +330,12 @@ const rootRouteChildren: RootRouteChildren = {
   LikesRoute: LikesRoute,
   ProfileRoute: ProfileRoute,
   VerifyRoute: VerifyRoute,
+  ProfileEditRoute: ProfileEditRoute,
+  ProfileHideRoute: ProfileHideRoute,
+  ProfileNotificationsRoute: ProfileNotificationsRoute,
+  ProfilePreferencesRoute: ProfilePreferencesRoute,
+  ProfileSettingsRoute: ProfileSettingsRoute,
+  ProfileWorkplaceRoute: ProfileWorkplaceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

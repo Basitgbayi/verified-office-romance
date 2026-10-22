@@ -6,10 +6,10 @@ import { Phone, IconChip } from "@/components/AppShell";
 export const Route = createFileRoute("/verify")({
   head: () => ({
     meta: [
-      { title: "Verify your workplace — Lunchbreak" },
+      { title: "Verify your workplace — Afterfive" },
       { name: "description", content: "Confirm your employer to join a community of verified professionals." },
-      { property: "og:title", content: "Verify your workplace — Lunchbreak" },
-      { property: "og:description", content: "Workplace verification keeps Lunchbreak real." },
+      { property: "og:title", content: "Verify your workplace — Afterfive" },
+      { property: "og:description", content: "Workplace verification keeps Afterfive real." },
     ],
   }),
   component: Verify,

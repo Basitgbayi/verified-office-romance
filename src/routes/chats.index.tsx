@@ -6,10 +6,10 @@ import { conversations, getProfile, profiles } from "@/lib/data";
 export const Route = createFileRoute("/chats/")({
   head: () => ({
     meta: [
-      { title: "Chats — Lunchbreak" },
+      { title: "Chats — Afterfive" },
       { name: "description", content: "Your matches and conversations." },
-      { property: "og:title", content: "Chats — Lunchbreak" },
-      { property: "og:description", content: "Message your Lunchbreak matches." },
+      { property: "og:title", content: "Chats — Afterfive" },
+      { property: "og:description", content: "Message your Afterfive matches." },
     ],
   }),
   component: Chats,

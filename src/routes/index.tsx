@@ -8,9 +8,9 @@ import p3 from "@/assets/p3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Lunchbreak — Dating for busy professionals" },
+      { title: "Afterfive — Dating for busy professionals" },
       { name: "description", content: "Meet verified corporate professionals who value their time as much as you do." },
-      { property: "og:title", content: "Lunchbreak — Dating for busy professionals" },
+      { property: "og:title", content: "Afterfive — Dating for busy professionals" },
       { property: "og:description", content: "Workplace-verified dating for the 9-to-5 crowd." },
     ],
   }),
@@ -25,7 +25,7 @@ function Welcome() {
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand text-primary-foreground">
             <Clock className="h-5 w-5" />
           </span>
-          <span className="font-display text-xl font-semibold">Lunchbreak</span>
+          <span className="font-display text-xl font-semibold">Afterfive</span>
         </div>
 
         <div className="relative mx-auto mt-10 h-64 w-full">

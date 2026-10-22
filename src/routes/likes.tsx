@@ -6,10 +6,10 @@ import { profiles } from "@/lib/data";
 export const Route = createFileRoute("/likes")({
   head: () => ({
     meta: [
-      { title: "Likes — Lunchbreak" },
+      { title: "Likes — Afterfive" },
       { name: "description", content: "See the professionals who liked your profile." },
-      { property: "og:title", content: "Likes — Lunchbreak" },
-      { property: "og:description", content: "People who liked you on Lunchbreak." },
+      { property: "og:title", content: "Likes — Afterfive" },
+      { property: "og:description", content: "People who liked you on Afterfive." },
     ],
   }),
   component: Likes,
@@ -25,7 +25,7 @@ function Likes() {
       <div className="mx-5 mt-4 flex items-center gap-3 rounded-3xl bg-sun-soft p-4">
         <span className="grid h-11 w-11 place-items-center rounded-2xl bg-sun text-on-photo"><Crown className="h-5 w-5" /></span>
         <div className="flex-1">
-          <p className="text-sm font-bold">Lunchbreak Gold</p>
+          <p className="text-sm font-bold">Afterfive Gold</p>
           <p className="text-xs text-muted-foreground">See everyone who likes you instantly</p>
         </div>
         <button className="rounded-full bg-ink px-4 py-2 text-xs font-bold text-background">Upgrade</button>

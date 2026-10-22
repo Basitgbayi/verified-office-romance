@@ -6,10 +6,10 @@ import { me } from "@/lib/data";
 export const Route = createFileRoute("/profile")({
   head: () => ({
     meta: [
-      { title: "My profile — Lunchbreak" },
-      { name: "description", content: "Manage your Lunchbreak profile and preferences." },
-      { property: "og:title", content: "My profile — Lunchbreak" },
-      { property: "og:description", content: "Your Lunchbreak profile." },
+      { title: "My profile — Afterfive" },
+      { name: "description", content: "Manage your Afterfive profile and preferences." },
+      { property: "og:title", content: "My profile — Afterfive" },
+      { property: "og:description", content: "Your Afterfive profile." },
     ],
   }),
   component: Profile,

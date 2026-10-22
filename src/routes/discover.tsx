@@ -123,8 +123,8 @@ function Slide({
         )}
 
         {first && !liked && (
-          <span className="absolute bottom-24 left-1/2 -translate-x-1/2 animate-bounce rounded-full bg-ink/50 px-3 py-1 text-[11px] font-semibold text-on-photo backdrop-blur">
-            Keep scrolling for more
+          <span className="absolute left-1/2 top-4 -translate-x-1/2 animate-bounce rounded-full bg-ink/50 px-3 py-1 text-[11px] font-semibold text-on-photo backdrop-blur">
+            Scroll for more
           </span>
         )}
 

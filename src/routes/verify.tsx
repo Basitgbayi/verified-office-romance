@@ -20,6 +20,8 @@ const methods = [
   { id: "linkedin", icon: Linkedin, tone: "sky", title: "LinkedIn", text: "Connect your current position" },
 ] as const;
 
+const states = ["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT Abuja","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
+
 const industries = [
   { id: "fintech", label: "💰 Fintech" },
   { id: "tech", label: "💻 Tech" },
@@ -38,6 +40,7 @@ function Verify() {
   const [interest, setInterest] = useState("Women");
   const [ageMin, setAgeMin] = useState(24);
   const [ageMax, setAgeMax] = useState(40);
+  const [stateName, setStateName] = useState("Lagos");
   const [distance, setDistance] = useState(15);
   const [picks, setPicks] = useState<string[]>([]);
   const [firstName, setFirstName] = useState("");
@@ -162,6 +165,15 @@ function Verify() {
                   </select>
                   <span className="text-xs font-semibold text-muted-foreground">years</span>
                 </div>
+              </div>
+
+              <div>
+                <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><MapPin className="h-3.5 w-3.5 text-berry" /> State</p>
+                <select value={stateName} onChange={(e) => setStateName(e.target.value)}
+                  className="h-12 w-full rounded-2xl bg-card px-4 text-sm font-semibold shadow-soft outline-none">
+                  <option value="Any">Any state</option>
+                  {states.map((st) => <option key={st} value={st}>{st}</option>)}
+                </select>
               </div>
 
               <div>

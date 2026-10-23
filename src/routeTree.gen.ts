@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChatsRouteImport } from './routes/chats'
 import { Route as DiscoverRouteImport } from './routes/discover'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as LikesRouteImport } from './routes/likes'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as ChatsIndexRouteImport } from './routes/chats.index'
 import { Route as ChatsIdRouteImport } from './routes/chats.$id'
@@ -40,6 +42,11 @@ const DiscoverRoute = DiscoverRouteImport.update({
   path: '/discover',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LikesRoute = LikesRouteImport.update({
   id: '/likes',
   path: '/likes',
@@ -53,6 +60,11 @@ const LoginRoute = LoginRouteImport.update({
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyRoute = VerifyRouteImport.update({
@@ -105,9 +117,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chats': typeof ChatsRouteWithChildren
   '/discover': typeof DiscoverRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/likes': typeof LikesRoute
   '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
   '/profile/edit': typeof ProfileEditRoute
@@ -121,9 +135,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/discover': typeof DiscoverRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/likes': typeof LikesRoute
   '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
   '/profile/edit': typeof ProfileEditRoute
@@ -139,9 +155,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/chats': typeof ChatsRouteWithChildren
   '/discover': typeof DiscoverRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/likes': typeof LikesRoute
   '/login': typeof LoginRoute
   '/profile': typeof ProfileRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/verify': typeof VerifyRoute
   '/chats/$id': typeof ChatsIdRoute
   '/profile_/edit': typeof ProfileEditRoute
@@ -158,9 +176,11 @@ export interface FileRouteTypes {
     | '/'
     | '/chats'
     | '/discover'
+    | '/forgot-password'
     | '/likes'
     | '/login'
     | '/profile'
+    | '/reset-password'
     | '/verify'
     | '/chats/$id'
     | '/profile/edit'
@@ -174,9 +194,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/discover'
+    | '/forgot-password'
     | '/likes'
     | '/login'
     | '/profile'
+    | '/reset-password'
     | '/verify'
     | '/chats/$id'
     | '/profile/edit'
@@ -191,9 +213,11 @@ export interface FileRouteTypes {
     | '/'
     | '/chats'
     | '/discover'
+    | '/forgot-password'
     | '/likes'
     | '/login'
     | '/profile'
+    | '/reset-password'
     | '/verify'
     | '/chats/$id'
     | '/profile_/edit'
@@ -209,9 +233,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChatsRoute: typeof ChatsRouteWithChildren
   DiscoverRoute: typeof DiscoverRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LikesRoute: typeof LikesRoute
   LoginRoute: typeof LoginRoute
   ProfileRoute: typeof ProfileRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   VerifyRoute: typeof VerifyRoute
   ProfileEditRoute: typeof ProfileEditRoute
   ProfileHideRoute: typeof ProfileHideRoute
@@ -244,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiscoverRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/likes': {
       id: '/likes'
       path: '/likes'
@@ -263,6 +296,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verify': {
@@ -347,9 +387,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChatsRoute: ChatsRouteWithChildren,
   DiscoverRoute: DiscoverRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LikesRoute: LikesRoute,
   LoginRoute: LoginRoute,
   ProfileRoute: ProfileRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   VerifyRoute: VerifyRoute,
   ProfileEditRoute: ProfileEditRoute,
   ProfileHideRoute: ProfileHideRoute,

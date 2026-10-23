@@ -1,8 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Phone, IconChip } from "@/components/AppShell";
+import { Phone } from "@/components/AppShell";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -46,29 +46,25 @@ function Login() {
         <p className="mt-2 text-sm text-muted-foreground">Log in to see today's picks.</p>
 
         <div className="mt-6 space-y-3">
-          <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
-            <IconChip icon={Mail} tone="coral" />
-            <div className="flex-1">
-              <span className="text-xs font-semibold text-muted-foreground">Email</span>
-              <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-transparent text-sm outline-none" placeholder="you@company.com" />
-            </div>
+          <label className="block rounded-2xl bg-card p-3 shadow-soft">
+            <span className="text-xs font-semibold text-muted-foreground">Email</span>
+            <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-transparent text-sm outline-none" placeholder="you@company.com" />
           </label>
-          <label className="flex items-center gap-3 rounded-2xl bg-card p-3 shadow-soft">
-            <IconChip icon={Lock} tone="sky" />
-            <div className="flex-1">
-              <span className="text-xs font-semibold text-muted-foreground">Password</span>
+          <label className="block rounded-2xl bg-card p-3 shadow-soft">
+            <span className="text-xs font-semibold text-muted-foreground">Password</span>
+            <div className="flex items-center gap-2">
               <input type={show ? "text" : "password"} autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-transparent text-sm outline-none" placeholder="Your password" />
+              <button type="button" onClick={() => setShow(!show)} aria-label={show ? "Hide password" : "Show password"} className="text-muted-foreground">
+                {show ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+              </button>
             </div>
-            <button type="button" onClick={() => setShow(!show)} aria-label={show ? "Hide password" : "Show password"} className="text-muted-foreground">
-              {show ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-            </button>
           </label>
           {error && <p className="text-sm font-semibold text-destructive">{error}</p>}
-          <button type="button" onClick={() => toast("Reset link sent to your email (demo)")} className="text-sm font-semibold text-primary">
+          <Link to="/forgot-password" className="text-sm font-semibold text-primary">
             Forgot password?
-          </button>
+          </Link>
         </div>
 
         <div className="mt-auto space-y-3 pb-8 pt-8">

@@ -67,6 +67,9 @@ function Verify() {
     if (beforeBirthday) age -= 1;
   }
   const personalOk = firstName.trim().length > 0 && lastName.trim().length > 0 && dobValid && age >= 18 && age <= 99;
+  const emailOk = /^\S+@\S+\.\S+$/.test(email);
+  const pwOk = password.length >= 6;
+  const accountOk = emailOk && pwOk && confirm === password;
   const nav = useNavigate();
 
   const togglePick = (id: string) =>
@@ -82,7 +85,7 @@ function Verify() {
             <button onClick={() => setStep(step - 1)} className="grid h-10 w-10 place-items-center rounded-full bg-card shadow-soft"><ArrowLeft className="h-5 w-5" /></button>
           )}
           <div className="flex gap-1.5">
-            {[0, 1, 2, 3, 4].map((i) => (
+            {[0, 1, 2, 3, 4, 5].map((i) => (
               <span key={i} className={`h-1.5 rounded-full transition-all ${i <= step ? "w-8 bg-primary" : "w-4 bg-border"}`} />
             ))}
           </div>

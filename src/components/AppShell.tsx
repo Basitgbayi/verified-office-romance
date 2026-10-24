@@ -1,7 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Clock, Flame, Heart, MessageCircle, User } from "lucide-react";
+import { Clock, Flame, Heart, LogOut, MessageCircle, User } from "lucide-react";
 import type { ReactNode } from "react";
-import { me } from "@/lib/data";
 
 const tabs = [
   { to: "/discover", label: "Discover", icon: Flame, color: "text-coral", bg: "bg-coral-soft" },
@@ -53,12 +52,11 @@ function Sidebar() {
         })}
       </nav>
 
-      <Link to="/profile" className="mt-auto flex items-center gap-3 rounded-2xl bg-muted p-3 transition hover:bg-accent">
-        <img src={me.photo} alt={me.name} className="h-10 w-10 rounded-full object-cover" />
-        <span className="min-w-0">
-          <span className="block truncate text-sm font-semibold">{me.name}</span>
-          <span className="block truncate text-xs text-muted-foreground">{me.role} · {me.company}</span>
+      <Link to="/" className="mt-auto flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold text-destructive transition hover:bg-muted">
+        <span className="grid h-10 w-10 place-items-center rounded-xl bg-muted">
+          <LogOut className="h-5 w-5" />
         </span>
+        Log out
       </Link>
     </aside>
   );

@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CalendarPlus, Coffee, Phone as PhoneIcon, Send, Smile, Video } from "lucide-react";
 import { useState } from "react";
-import { Phone, VerifiedBadge } from "@/components/AppShell";
+import { DesktopShell, Phone, VerifiedBadge } from "@/components/AppShell";
 import { conversations, getProfile, type Message } from "@/lib/data";
 
 export const Route = createFileRoute("/chats/$id")({

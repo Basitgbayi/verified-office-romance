@@ -30,7 +30,7 @@ function Likes() {
         </div>
         <button className="rounded-full bg-ink px-4 py-2 text-xs font-bold text-background">Upgrade</button>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-3 px-5">
+      <div className="mt-4 grid grid-cols-2 gap-3 px-5 sm:grid-cols-3">
         {profiles.map((p, i) => (
           <div key={p.id} className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-soft">
             <img src={p.photo} alt={p.name} loading="lazy" className={`h-full w-full object-cover ${i > 1 ? "blur-md" : ""}`} />

@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Briefcase, CheckCircle2, Heart, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { ArrowLeft, Briefcase, CheckCircle2, Eye, EyeOff, Heart, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Phone, IconChip } from "@/components/AppShell";
 
@@ -50,6 +50,10 @@ function Verify() {
   const [dobDay, setDobDay] = useState("Day");
   const [dobMonth, setDobMonth] = useState("Month");
   const [dobYear, setDobYear] = useState("Year");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [showPw, setShowPw] = useState(false);
 
   const dob = dobDay !== "Day" && dobMonth !== "Month" && dobYear !== "Year"
     ? new Date(Number(dobYear), Number(dobMonth), Number(dobDay))

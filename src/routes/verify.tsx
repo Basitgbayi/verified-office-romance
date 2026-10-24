@@ -135,6 +135,38 @@ function Verify() {
 
         {step === 1 && (
           <>
+            <h1 className="mt-8 text-3xl font-semibold">Create your account</h1>
+            <p className="mt-2 text-sm text-muted-foreground">Use your personal email — not your work one. You'll use it to log in.</p>
+            <div className="mt-6 space-y-3">
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Email</span>
+                <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-transparent text-sm outline-none" placeholder="you@gmail.com" />
+              </label>
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Password</span>
+                <div className="flex items-center gap-2">
+                  <input type={showPw ? "text" : "password"} autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)}
+                    className="w-full bg-transparent text-sm outline-none" placeholder="At least 6 characters" />
+                  <button type="button" onClick={() => setShowPw(!showPw)} aria-label={showPw ? "Hide password" : "Show password"} className="text-muted-foreground">
+                    {showPw ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+              </label>
+              <label className="block rounded-2xl bg-card p-3 shadow-soft">
+                <span className="text-xs font-semibold text-muted-foreground">Confirm password</span>
+                <input type={showPw ? "text" : "password"} autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)}
+                  className="w-full bg-transparent text-sm outline-none" placeholder="Type it again" />
+              </label>
+              {email.length > 0 && !emailOk && <p className="text-sm font-semibold text-destructive">Enter a valid email address.</p>}
+              {password.length > 0 && !pwOk && <p className="text-sm font-semibold text-destructive">Password must be at least 6 characters.</p>}
+              {confirm.length > 0 && confirm !== password && <p className="text-sm font-semibold text-destructive">Passwords don't match.</p>}
+            </div>
+          </>
+        )}
+
+        {step === 2 && (
+          <>
             <h1 className="mt-8 text-3xl font-semibold">Where do you work?</h1>
             <p className="mt-2 text-sm text-muted-foreground">Only professionals with a real 9-to-5 can join.</p>
             <div className="mt-6 space-y-3">

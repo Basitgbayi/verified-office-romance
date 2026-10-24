@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CalendarPlus, Coffee, Phone as PhoneIcon, Send, Smile, Video } from "lucide-react";
 import { useState } from "react";
-import { Phone, VerifiedBadge } from "@/components/AppShell";
+import { DesktopShell, Phone, VerifiedBadge } from "@/components/AppShell";
 import { conversations, getProfile, type Message } from "@/lib/data";
 
 export const Route = createFileRoute("/chats/$id")({
@@ -34,17 +34,17 @@ function Chat() {
     setTimeout(() => setMsgs((m) => [...m, { from: "them", text: "Sounds great! 😊", time: "now" }]), 1200);
   };
 
-  return (
-    <Phone>
+  const body = (
+    <>
       <header className="flex items-center gap-3 border-b bg-card px-4 py-3">
-        <Link to="/chats" className="grid h-9 w-9 place-items-center rounded-full bg-muted"><ArrowLeft className="h-5 w-5" /></Link>
+        <Link to="/chats" aria-label="Back to chats" className="grid h-9 w-9 place-items-center rounded-full bg-muted"><ArrowLeft className="h-5 w-5" /></Link>
         <img src={p.photo} alt={p.name} className="h-10 w-10 rounded-full object-cover" />
         <div className="flex-1">
           <p className="flex items-center gap-1.5 font-semibold">{p.name} <VerifiedBadge /></p>
           <p className="text-[11px] text-muted-foreground">{p.role} · {p.company}</p>
         </div>
-        <button className="grid h-9 w-9 place-items-center rounded-full bg-mint-soft text-mint"><PhoneIcon className="h-4 w-4" /></button>
-        <button className="grid h-9 w-9 place-items-center rounded-full bg-sky-soft text-sky"><Video className="h-4 w-4" /></button>
+        <button aria-label="Voice call" className="grid h-9 w-9 place-items-center rounded-full bg-mint-soft text-mint"><PhoneIcon className="h-4 w-4" /></button>
+        <button aria-label="Video call" className="grid h-9 w-9 place-items-center rounded-full bg-sky-soft text-sky"><Video className="h-4 w-4" /></button>
       </header>
 
       <div className="flex-1 space-y-2 overflow-y-auto px-4 py-4">
@@ -64,12 +64,21 @@ function Chat() {
         <Quick icon={CalendarPlus} cls="bg-berry-soft text-berry" label="Plan a date after work" onClick={send} />
       </div>
 
-      <form onSubmit={(e) => { e.preventDefault(); send(text); }} className="flex items-center gap-2 border-t bg-card px-3 py-3 pb-6">
-        <button type="button" className="grid h-10 w-10 place-items-center rounded-full bg-sun-soft text-sun"><Smile className="h-5 w-5" /></button>
+      <form onSubmit={(e) => { e.preventDefault(); send(text); }} className="flex items-center gap-2 border-t bg-card px-3 py-3 pb-6 lg:pb-3">
+        <button type="button" aria-label="Add emoji" className="grid h-10 w-10 place-items-center rounded-full bg-sun-soft text-sun"><Smile className="h-5 w-5" /></button>
         <input value={text} onChange={(e) => setText(e.target.value)} className="h-11 flex-1 rounded-full bg-muted px-4 text-sm outline-none" placeholder="Type a message..." />
-        <button className="grid h-11 w-11 place-items-center rounded-full bg-brand text-primary-foreground"><Send className="h-5 w-5" /></button>
+        <button aria-label="Send message" className="grid h-11 w-11 place-items-center rounded-full bg-brand text-primary-foreground"><Send className="h-5 w-5" /></button>
       </form>
-    </Phone>
+    </>
+  );
+
+  return (
+    <>
+      <div className="lg:hidden">
+        <Phone>{body}</Phone>
+      </div>
+      <DesktopShell flush>{body}</DesktopShell>
+    </>
   );
 }
 

@@ -41,9 +41,9 @@ function Login() {
   const fields = (
     <div className="space-y-3">
       <label className="block rounded-2xl bg-card p-3 shadow-soft">
-        <span className="text-xs font-semibold text-muted-foreground">Email</span>
+        <span className="text-xs font-semibold text-muted-foreground">Personal email</span>
         <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
-          className="w-full bg-transparent text-sm outline-none" placeholder="you@company.com" />
+          className="w-full bg-transparent text-sm outline-none" placeholder="you@gmail.com" />
       </label>
       <label className="block rounded-2xl bg-card p-3 shadow-soft">
         <span className="text-xs font-semibold text-muted-foreground">Password</span>
@@ -69,7 +69,7 @@ function Login() {
           <form onSubmit={submit} className="flex flex-1 flex-col px-6 pt-6">
             <Link to="/" aria-label="Back" className="grid h-10 w-10 place-items-center rounded-full bg-card shadow-soft"><ArrowLeft className="h-5 w-5" /></Link>
             <h1 className="mt-8 text-3xl font-semibold">Welcome back</h1>
-            <p className="mt-2 text-sm text-muted-foreground">Log in to see today's picks.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Log in with the personal email and password you signed up with.</p>
 
             <div className="mt-6">{fields}</div>
 

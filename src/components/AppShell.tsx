@@ -64,7 +64,7 @@ function Sidebar() {
   );
 }
 
-export function DesktopShell({ children, flush }: { children: ReactNode; flush?: boolean }) {
+export function DesktopShell({ children, flush }: { children: ReactNode; flush?: boolean | undefined }) {
   return (
     <div className="hidden h-dvh w-full lg:flex">
       <Sidebar />

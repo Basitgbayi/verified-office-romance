@@ -182,7 +182,7 @@ function Verify() {
           </>
         )}
 
-        {step === 2 && (
+        {step === 3 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Verify your workplace</h1>
             <p className="mt-2 text-sm text-muted-foreground">Pick one. Your employer never sees your profile.</p>
@@ -203,7 +203,7 @@ function Verify() {
           </>
         )}
 
-        {step === 3 && (
+        {step === 4 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Who are you looking for?</h1>
             <p className="mt-2 text-sm text-muted-foreground">Set your preferences. You can change these anytime.</p>
@@ -276,7 +276,7 @@ function Verify() {
           </>
         )}
 
-        {step === 4 && (
+        {step === 5 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Enter the code</h1>
             <p className="mt-2 text-sm text-muted-foreground">We sent a 4-digit code to your work email. (Demo: any 4 digits)</p>
@@ -287,10 +287,10 @@ function Verify() {
 
         <div className="mt-auto pb-8 pt-8">
           <button
-            disabled={(step === 0 && !personalOk) || (step === 4 && code.length < 4)}
-            onClick={() => (step < 4 ? setStep(step + 1) : nav({ to: "/discover" }))}
+            disabled={(step === 0 && !personalOk) || (step === 1 && !accountOk) || (step === 5 && code.length < 4)}
+            onClick={() => (step < 5 ? setStep(step + 1) : nav({ to: "/discover" }))}
             className="h-14 w-full rounded-full bg-brand font-semibold text-primary-foreground shadow-card disabled:opacity-40">
-            {step < 4 ? "Continue" : "Verify & start matching"}
+            {step < 5 ? "Continue" : "Verify & start matching"}
           </button>
         </div>
       </div>

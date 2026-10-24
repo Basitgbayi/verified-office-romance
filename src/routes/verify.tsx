@@ -92,7 +92,7 @@ function Verify() {
           <span className="w-10" />
         </div>
 
-        {step === 0 && (
+        {step === 1 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Tell us about you</h1>
             <p className="mt-2 text-sm text-muted-foreground">Your first name and age show on your profile.</p>
@@ -133,7 +133,7 @@ function Verify() {
           </>
         )}
 
-        {step === 1 && (
+        {step === 0 && (
           <>
             <h1 className="mt-8 text-3xl font-semibold">Create your account</h1>
             <p className="mt-2 text-sm text-muted-foreground">Use your personal email — not your work one. You'll use it to log in.</p>
@@ -287,7 +287,7 @@ function Verify() {
 
         <div className="mt-auto pb-8 pt-8">
           <button
-            disabled={(step === 0 && !personalOk) || (step === 1 && !accountOk) || (step === 5 && code.length < 4)}
+            disabled={(step === 0 && !accountOk) || (step === 1 && !personalOk) || (step === 5 && code.length < 4)}
             onClick={() => (step < 5 ? setStep(step + 1) : nav({ to: "/discover" }))}
             className="h-14 w-full rounded-full bg-brand font-semibold text-primary-foreground shadow-card disabled:opacity-40">
             {step < 5 ? "Continue" : "Verify & start matching"}

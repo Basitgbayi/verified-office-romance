@@ -105,7 +105,7 @@ function Login() {
         <div className="flex items-center justify-center bg-background p-14">
           <form onSubmit={submit} className="w-full max-w-sm">
             <h1 className="text-3xl font-semibold">Welcome back</h1>
-            <p className="mt-2 text-sm text-muted-foreground">Log in to see today's picks.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Log in with the personal email and password you signed up with.</p>
             <div className="mt-6">{fields}</div>
             <div className="mt-8 space-y-3">
               <SubmitButton loading={loading} />

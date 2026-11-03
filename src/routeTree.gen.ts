@@ -26,6 +26,12 @@ import { Route as ProfileNotificationsRouteImport } from './routes/profile_.noti
 import { Route as ProfilePreferencesRouteImport } from './routes/profile_.preferences'
 import { Route as ProfileSettingsRouteImport } from './routes/profile_.settings'
 import { Route as ProfileWorkplaceRouteImport } from './routes/profile_.workplace'
+import { Route as ProfileSettingsIndexRouteImport } from './routes/profile_.settings.index'
+import { Route as ProfileSettingsHelpRouteImport } from './routes/profile_.settings.help'
+import { Route as ProfileSettingsLanguageRouteImport } from './routes/profile_.settings.language'
+import { Route as ProfileSettingsLegalRouteImport } from './routes/profile_.settings.legal'
+import { Route as ProfileSettingsPhoneRouteImport } from './routes/profile_.settings.phone'
+import { Route as ProfileSettingsSafetyRouteImport } from './routes/profile_.settings.safety'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -112,6 +118,36 @@ const ProfileWorkplaceRoute = ProfileWorkplaceRouteImport.update({
   path: '/profile/workplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileSettingsIndexRoute = ProfileSettingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfileSettingsRoute,
+} as any)
+const ProfileSettingsHelpRoute = ProfileSettingsHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => ProfileSettingsRoute,
+} as any)
+const ProfileSettingsLanguageRoute = ProfileSettingsLanguageRouteImport.update({
+  id: '/language',
+  path: '/language',
+  getParentRoute: () => ProfileSettingsRoute,
+} as any)
+const ProfileSettingsLegalRoute = ProfileSettingsLegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => ProfileSettingsRoute,
+} as any)
+const ProfileSettingsPhoneRoute = ProfileSettingsPhoneRouteImport.update({
+  id: '/phone',
+  path: '/phone',
+  getParentRoute: () => ProfileSettingsRoute,
+} as any)
+const ProfileSettingsSafetyRoute = ProfileSettingsSafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => ProfileSettingsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -128,9 +164,15 @@ export interface FileRoutesByFullPath {
   '/profile/hide': typeof ProfileHideRoute
   '/profile/notifications': typeof ProfileNotificationsRoute
   '/profile/preferences': typeof ProfilePreferencesRoute
-  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile/settings': typeof ProfileSettingsRouteWithChildren
   '/profile/workplace': typeof ProfileWorkplaceRoute
   '/chats/': typeof ChatsIndexRoute
+  '/profile/settings/help': typeof ProfileSettingsHelpRoute
+  '/profile/settings/language': typeof ProfileSettingsLanguageRoute
+  '/profile/settings/legal': typeof ProfileSettingsLegalRoute
+  '/profile/settings/phone': typeof ProfileSettingsPhoneRoute
+  '/profile/settings/safety': typeof ProfileSettingsSafetyRoute
+  '/profile/settings/': typeof ProfileSettingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -146,9 +188,14 @@ export interface FileRoutesByTo {
   '/profile/hide': typeof ProfileHideRoute
   '/profile/notifications': typeof ProfileNotificationsRoute
   '/profile/preferences': typeof ProfilePreferencesRoute
-  '/profile/settings': typeof ProfileSettingsRoute
   '/profile/workplace': typeof ProfileWorkplaceRoute
   '/chats': typeof ChatsIndexRoute
+  '/profile/settings/help': typeof ProfileSettingsHelpRoute
+  '/profile/settings/language': typeof ProfileSettingsLanguageRoute
+  '/profile/settings/legal': typeof ProfileSettingsLegalRoute
+  '/profile/settings/phone': typeof ProfileSettingsPhoneRoute
+  '/profile/settings/safety': typeof ProfileSettingsSafetyRoute
+  '/profile/settings': typeof ProfileSettingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -166,9 +213,15 @@ export interface FileRoutesById {
   '/profile_/hide': typeof ProfileHideRoute
   '/profile_/notifications': typeof ProfileNotificationsRoute
   '/profile_/preferences': typeof ProfilePreferencesRoute
-  '/profile_/settings': typeof ProfileSettingsRoute
+  '/profile_/settings': typeof ProfileSettingsRouteWithChildren
   '/profile_/workplace': typeof ProfileWorkplaceRoute
   '/chats/': typeof ChatsIndexRoute
+  '/profile_/settings/help': typeof ProfileSettingsHelpRoute
+  '/profile_/settings/language': typeof ProfileSettingsLanguageRoute
+  '/profile_/settings/legal': typeof ProfileSettingsLegalRoute
+  '/profile_/settings/phone': typeof ProfileSettingsPhoneRoute
+  '/profile_/settings/safety': typeof ProfileSettingsSafetyRoute
+  '/profile_/settings/': typeof ProfileSettingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -190,6 +243,12 @@ export interface FileRouteTypes {
     | '/profile/settings'
     | '/profile/workplace'
     | '/chats/'
+    | '/profile/settings/help'
+    | '/profile/settings/language'
+    | '/profile/settings/legal'
+    | '/profile/settings/phone'
+    | '/profile/settings/safety'
+    | '/profile/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -205,9 +264,14 @@ export interface FileRouteTypes {
     | '/profile/hide'
     | '/profile/notifications'
     | '/profile/preferences'
-    | '/profile/settings'
     | '/profile/workplace'
     | '/chats'
+    | '/profile/settings/help'
+    | '/profile/settings/language'
+    | '/profile/settings/legal'
+    | '/profile/settings/phone'
+    | '/profile/settings/safety'
+    | '/profile/settings'
   id:
     | '__root__'
     | '/'
@@ -227,6 +291,12 @@ export interface FileRouteTypes {
     | '/profile_/settings'
     | '/profile_/workplace'
     | '/chats/'
+    | '/profile_/settings/help'
+    | '/profile_/settings/language'
+    | '/profile_/settings/legal'
+    | '/profile_/settings/phone'
+    | '/profile_/settings/safety'
+    | '/profile_/settings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -243,7 +313,7 @@ export interface RootRouteChildren {
   ProfileHideRoute: typeof ProfileHideRoute
   ProfileNotificationsRoute: typeof ProfileNotificationsRoute
   ProfilePreferencesRoute: typeof ProfilePreferencesRoute
-  ProfileSettingsRoute: typeof ProfileSettingsRoute
+  ProfileSettingsRoute: typeof ProfileSettingsRouteWithChildren
   ProfileWorkplaceRoute: typeof ProfileWorkplaceRoute
 }
 
@@ -368,6 +438,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileWorkplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile_/settings/': {
+      id: '/profile_/settings/'
+      path: '/'
+      fullPath: '/profile/settings/'
+      preLoaderRoute: typeof ProfileSettingsIndexRouteImport
+      parentRoute: typeof ProfileSettingsRoute
+    }
+    '/profile_/settings/help': {
+      id: '/profile_/settings/help'
+      path: '/help'
+      fullPath: '/profile/settings/help'
+      preLoaderRoute: typeof ProfileSettingsHelpRouteImport
+      parentRoute: typeof ProfileSettingsRoute
+    }
+    '/profile_/settings/language': {
+      id: '/profile_/settings/language'
+      path: '/language'
+      fullPath: '/profile/settings/language'
+      preLoaderRoute: typeof ProfileSettingsLanguageRouteImport
+      parentRoute: typeof ProfileSettingsRoute
+    }
+    '/profile_/settings/legal': {
+      id: '/profile_/settings/legal'
+      path: '/legal'
+      fullPath: '/profile/settings/legal'
+      preLoaderRoute: typeof ProfileSettingsLegalRouteImport
+      parentRoute: typeof ProfileSettingsRoute
+    }
+    '/profile_/settings/phone': {
+      id: '/profile_/settings/phone'
+      path: '/phone'
+      fullPath: '/profile/settings/phone'
+      preLoaderRoute: typeof ProfileSettingsPhoneRouteImport
+      parentRoute: typeof ProfileSettingsRoute
+    }
+    '/profile_/settings/safety': {
+      id: '/profile_/settings/safety'
+      path: '/safety'
+      fullPath: '/profile/settings/safety'
+      preLoaderRoute: typeof ProfileSettingsSafetyRouteImport
+      parentRoute: typeof ProfileSettingsRoute
+    }
   }
 }
 
@@ -383,6 +495,28 @@ const ChatsRouteChildren: ChatsRouteChildren = {
 
 const ChatsRouteWithChildren = ChatsRoute._addFileChildren(ChatsRouteChildren)
 
+interface ProfileSettingsRouteChildren {
+  ProfileSettingsHelpRoute: typeof ProfileSettingsHelpRoute
+  ProfileSettingsLanguageRoute: typeof ProfileSettingsLanguageRoute
+  ProfileSettingsLegalRoute: typeof ProfileSettingsLegalRoute
+  ProfileSettingsPhoneRoute: typeof ProfileSettingsPhoneRoute
+  ProfileSettingsSafetyRoute: typeof ProfileSettingsSafetyRoute
+  ProfileSettingsIndexRoute: typeof ProfileSettingsIndexRoute
+}
+
+const ProfileSettingsRouteChildren: ProfileSettingsRouteChildren = {
+  ProfileSettingsHelpRoute: ProfileSettingsHelpRoute,
+  ProfileSettingsLanguageRoute: ProfileSettingsLanguageRoute,
+  ProfileSettingsLegalRoute: ProfileSettingsLegalRoute,
+  ProfileSettingsPhoneRoute: ProfileSettingsPhoneRoute,
+  ProfileSettingsSafetyRoute: ProfileSettingsSafetyRoute,
+  ProfileSettingsIndexRoute: ProfileSettingsIndexRoute,
+}
+
+const ProfileSettingsRouteWithChildren = ProfileSettingsRoute._addFileChildren(
+  ProfileSettingsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChatsRoute: ChatsRouteWithChildren,
@@ -397,7 +531,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileHideRoute: ProfileHideRoute,
   ProfileNotificationsRoute: ProfileNotificationsRoute,
   ProfilePreferencesRoute: ProfilePreferencesRoute,
-  ProfileSettingsRoute: ProfileSettingsRoute,
+  ProfileSettingsRoute: ProfileSettingsRouteWithChildren,
   ProfileWorkplaceRoute: ProfileWorkplaceRoute,
 }
 export const routeTree = rootRouteImport

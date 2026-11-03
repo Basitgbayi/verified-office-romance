@@ -5,13 +5,14 @@ import { toast } from "sonner";
 import { AppShell, IconChip } from "@/components/AppShell";
 import { Switch } from "@/components/ui/switch";
 
-export function SubPage({ title, subtitle, children, onSave }: { title: string; subtitle?: string; children: ReactNode; onSave?: () => void }) {
+export function SubPage({ title, subtitle, children, onSave, backTo = "/profile" }: { title: string; subtitle?: string; children: ReactNode; onSave?: () => void; backTo?: string }) {
   return (
     <AppShell>
       <div className="flex items-center gap-3 px-5 pt-6">
-        <Link to="/profile" aria-label="Back" className="grid h-10 w-10 place-items-center rounded-full bg-card shadow-soft">
+        <Link to={backTo} aria-label="Back" className="grid h-10 w-10 place-items-center rounded-full bg-card shadow-soft">
           <ChevronLeft className="h-5 w-5" />
         </Link>
+
         <div className="flex-1">
           <h1 className="font-display text-xl font-semibold">{title}</h1>
           {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
